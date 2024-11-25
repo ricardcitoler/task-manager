@@ -2,7 +2,6 @@ import { Reducer } from "@reduxjs/toolkit";
 import { produce, Draft } from "immer";
 import { BoardActionType } from "../actions/boards";
 import { Board } from "@/types/types";
-import { boardsGenerator } from "../../../utils/generator";
 
 interface BoardsState {
   boards: Board[];

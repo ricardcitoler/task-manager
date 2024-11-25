@@ -23,4 +23,9 @@ export interface Tags {
   color: string;
 }
 
-type TaskState = "BACKLOG" | "IN_PROGRESS" | "IN_REVIEW" | "COMPLETED";
+export interface ColumnType {
+  name: string;
+  tasks: Task[];
+}
+
+export type TaskState = "BACKLOG" | "IN_PROGRESS" | "IN_REVIEW" | "COMPLETED";

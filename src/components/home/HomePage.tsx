@@ -1,7 +1,6 @@
 "use client"
 import React, { useState } from 'react'
 import Sidebar from './sidebar/Sidebar'
-import { boardsGenerator } from '../../../utils/generator';
 import Dashboard from './board/Dashboard';
 import CreateBoardModal from '../modals/CreateBoardModal';
 

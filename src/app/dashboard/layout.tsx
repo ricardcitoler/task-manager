@@ -1,10 +1,8 @@
 
 import HomeLayout from "@/components/home/HomeLayout";
 import { boardsGenerator } from "../../../utils/generator";
-import { Board } from "@/types/types";
 
-
-const Page = async ({ children }: { children: React.ReactNode }) => {
+const Layout = async ({ children }: { children: React.ReactNode }) => {
     try {
         const initialBoards = await boardsGenerator();
 
@@ -23,4 +21,4 @@ const Page = async ({ children }: { children: React.ReactNode }) => {
     }
 };
 
-export default Page;
+export default Layout;
