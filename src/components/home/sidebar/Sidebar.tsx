@@ -26,18 +26,18 @@ const Sidebar: FC<Props> = ({ className, setIsCreateBoardModalOpen, isCreateBoar
     }
 
     return (
-        <div className={`relative h-full flex flex-col overflow-hidden ${className}`}>
+        <div className={`relative min-w-[78px] h-full flex flex-col ${className}`}>
             <div className=" space-y-5 scroll-y-auto">
-                <h1 className="text-[20px]">Boards</h1>
+                <h1 className="text-[20px] px-2">Boards</h1>
                 {boards.map((board) => (
                     <BoardLabel key={board.id} board={board} />
                 ))}
                 <button
                     onClick={() => setIsCreateBoardModalOpen(true)}
-                    className="flex items-center justify-center gap-2"
+                    className="flex px-2 py-1 items-center justify-center gap-2"
                 >
-                    <FaCirclePlus />
-                    <p className="hidden md:block truncate">Add new board</p> {/* Oculto en pantallas pequeñas */}
+                    <FaCirclePlus className="h-5 w-5 md:w-4 md:h-4" />
+                    <p className="hidden  md:block truncate">Add new board</p> {/* Oculto en pantallas pequeñas */}
                 </button>
             </div>
             <div className="w-full absolute bottom-0">

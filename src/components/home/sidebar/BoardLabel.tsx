@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { setDetailBoardAction } from "@/redux/actions/boards";
 import { useBoards } from "@/redux/selector/board";
 import { Board } from "@/types/types";
@@ -11,29 +11,29 @@ interface Props {
 }
 
 const BoardLabel: FC<Props> = ({ board }) => {
-
-    const [isSelected, setIsSelected] = useState(false)
+    const [isSelected, setIsSelected] = useState(false);
     const dispatch: Dispatch<any> = useDispatch();
-
-    const { detailBoard } = useBoards()
+    const { detailBoard } = useBoards();
 
     const handleSelectBoard = () => {
-        dispatch(setDetailBoardAction(board))
-    }
+        dispatch(setDetailBoardAction(board));
+    };
 
     useEffect(() => {
         if (detailBoard?.id === board.id) {
-            setIsSelected(true)
+            setIsSelected(true);
         } else {
-            setIsSelected(false)
+            setIsSelected(false);
         }
-    }, [detailBoard])
-
-
+    }, [detailBoard]);
 
     return (
-        <div>
-            <button onClick={handleSelectBoard} className={`flex items-center justify-start gap-2 ${isSelected ? "border-2 border-blue-600 rounded-full px-2 py-1" : ""}`}>
+        <div className="pr-1">
+            <button
+                onClick={handleSelectBoard}
+                className={`flex items-center justify-start gap-2 px-2 py-1 ${isSelected ? "border-2 border-blue-600 rounded-full" : ""
+                    }`}
+            >
                 {board.logo && (
                     <img
                         src={board.logo}
@@ -41,12 +41,12 @@ const BoardLabel: FC<Props> = ({ board }) => {
                         className="w-6 h-6 rounded-full object-cover"
                     />
                 )}
-                <p className="truncate text-sm font-medium text-black dark:text-white">
+                {/* Título visible solo en pantallas md o más grandes */}
+                <p className="truncate text-sm font-medium text-black dark:text-white hidden md:block">
                     {board.title}
                 </p>
             </button>
         </div>
-
     );
 };
 
