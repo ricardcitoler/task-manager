@@ -9,6 +9,8 @@ const Dashboard: FC<Props> = ({ className }) => {
 
     const { detailBoard } = useBoards()
 
+    const tasks = detailBoard?.tasks || []
+
     return (
         <div className={`bg-light-secondary dark:bg-dark-secondary rounded-xl ${className}`}>
             <div></div>

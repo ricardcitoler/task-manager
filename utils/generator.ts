@@ -1,5 +1,30 @@
 import { Board, Tags, Task } from "@/types/types";
 
+// Palabras para generar títulos significativos
+const adjectives = [
+  "Creative",
+  "Dynamic",
+  "Efficient",
+  "Agile",
+  "Innovative",
+  "Strategic",
+  "Focused",
+  "Organized",
+  "Collaborative",
+];
+const nouns = [
+  "Project",
+  "Sprint",
+  "Team",
+  "Workflow",
+  "Board",
+  "Roadmap",
+  "Plan",
+  "Strategy",
+  "Tasks",
+  "Goals",
+];
+
 // Predefine un array con URLs de imágenes únicas
 const imageURLs = Array.from({ length: 10 }).map(
   (_, i) => `https://picsum.photos/id/${i + 1}/200/300`
@@ -9,6 +34,14 @@ const imageURLs = Array.from({ length: 10 }).map(
 const getRandomImageFromSet = (): string => {
   const randomIndex = Math.floor(Math.random() * imageURLs.length);
   return imageURLs[randomIndex];
+};
+
+// Generar un título aleatorio para un board
+const generateBoardTitle = (): string => {
+  const randomAdjective =
+    adjectives[Math.floor(Math.random() * adjectives.length)];
+  const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
+  return `${randomAdjective} ${randomNoun}`;
 };
 
 // Generar tags aleatorios
@@ -45,7 +78,7 @@ const generateRandomTasks = async (): Promise<Task[]> => {
 export const boardsGenerator = async (): Promise<Board[]> => {
   const boards = Array.from({ length: 13 }).map(async () => ({
     id: crypto.randomUUID(),
-    title: `Board ${Math.random().toString(36).substring(7)}`,
+    title: generateBoardTitle(), // Títulos significativos
     tasks: await generateRandomTasks(),
     logo: getRandomImageFromSet(), // Logo aleatorio
     createdAt: new Date().toISOString(),
