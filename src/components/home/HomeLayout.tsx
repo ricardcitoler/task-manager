@@ -1,5 +1,5 @@
 "use client"
-import { setBoardsAction } from "@/redux/actions/boards";
+import { setBoardsAction, setDetailBoardAction } from "@/redux/actions/boards";
 import { Board } from "@/types/types";
 import { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -14,6 +14,7 @@ const HomeLayout: FC<Props> = ({ initialBoards, children }) => {
 
     useEffect(() => {
         dispatch(setBoardsAction(initialBoards));
+        dispatch(setDetailBoardAction(initialBoards[0]));
     }, []);
 
     return <>{children}</>;

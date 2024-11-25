@@ -6,10 +6,12 @@ import { boardsGenerator } from "../../../utils/generator";
 
 interface BoardsState {
   boards: Board[];
+  detailBoard?: Board | null;
 }
 
 const initialState: BoardsState = {
   boards: [],
+  detailBoard: null,
 };
 
 const boardsReducer: Reducer<BoardsState, BoardActionType> = (
@@ -22,6 +24,9 @@ const boardsReducer: Reducer<BoardsState, BoardActionType> = (
         draft.boards = action.payload;
         break;
 
+      case "SET_DETAIL_BOARD":
+        draft.detailBoard = action.payload;
+        break;
       case "ADD_BOARD":
         draft.boards.push(action.payload);
         break;

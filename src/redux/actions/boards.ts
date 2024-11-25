@@ -8,11 +8,17 @@ export type BoardActionType =
   | ReturnType<typeof addTaskToBoardAction>
   | ReturnType<typeof removeTaskFromBoardAction>
   | ReturnType<typeof setTasksForBoardAction>
-  | ReturnType<typeof updateTaskInBoardAction>;
+  | ReturnType<typeof updateTaskInBoardAction>
+  | ReturnType<typeof setDetailBoardAction>;
 
 // Acciones relacionadas con boards
 export const addBoardAction = (board: Board) => ({
   type: "ADD_BOARD" as const,
+  payload: board,
+});
+
+export const setDetailBoardAction = (board: Board) => ({
+  type: "SET_DETAIL_BOARD" as const,
   payload: board,
 });
 

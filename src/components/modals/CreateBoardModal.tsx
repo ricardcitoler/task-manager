@@ -7,7 +7,7 @@ import { z } from "zod";
 import { useForm } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addBoardAction } from '@/redux/actions/boards';
-import { createBoardSchema } from '@/validators/shemas';
+import { createBoardSchema } from '@/validators/schemas';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 

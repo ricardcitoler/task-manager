@@ -6,7 +6,7 @@ import Dashboard from './board/Dashboard';
 import CreateBoardModal from '../modals/CreateBoardModal';
 
 const HomePage = () => {
-    const [isCreateBoardModalOpen, setIsCreateBoardModalOpen] = useState(true);
+    const [isCreateBoardModalOpen, setIsCreateBoardModalOpen] = useState(false);
 
     return (
         <div className='w-full h-screen flex p-4 gap-4'>
