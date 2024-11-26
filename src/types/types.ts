@@ -11,6 +11,7 @@ export interface Task {
   id: string;
   title: string;
   state: TaskState;
+  position: number; // Agregado para el orden
   image?: string;
   tags?: Tags[];
   createdAt: string;

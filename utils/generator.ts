@@ -27,7 +27,7 @@ const nouns = [
 
 // Predefine un array con URLs de imágenes únicas
 const imageURLs = Array.from({ length: 10 }).map(
-  (_, i) => `https://picsum.photos/id/${i + 1}/200/300`
+  (_, i) => `https://picsum.photos/id/${i + 1}/100/100`
 );
 
 // Función para obtener una imagen aleatoria del array
@@ -62,16 +62,16 @@ const generateTagName = (): string => {
 // Generar tags aleatorios
 const generateRandomTags = (): Tags[] => {
   const colors = [
-    "red-300",
-    "blue-300",
-    "green-300",
-    "yellow-300",
-    "purple-300",
-    "orange-300",
-    "pink-300",
-    "teal-300",
-    "cyan-300",
-    "lime-300",
+    "red-100",
+    "blue-100",
+    "green-100",
+    "yellow-100",
+    "purple-100",
+    "orange-100",
+    "pink-100",
+    "teal-100",
+    "cyan-100",
+    "lime-100",
   ];
   return Array.from({ length: Math.floor(Math.random() * 4) + 1 }).map(() => ({
     id: crypto.randomUUID(),
@@ -89,12 +89,14 @@ const generateRandomTasks = async (): Promise<Task[]> => {
     "COMPLETED",
   ];
 
-  // Genera al menos 3 tareas por estado
+  // Genera al menos 3 tareas por estado con una posición única
+  let positionCounter = 0; // Contador global para asignar posiciones
   const tasksByState = states.flatMap((state) =>
     Array.from({ length: 3 }).map(() => ({
       id: crypto.randomUUID(),
       title: generateTaskTitle(), // Nombres plausibles
       state, // Aseguramos el tipo TaskState
+      position: positionCounter++, // Incrementamos la posición única
       image: Math.random() > 0.5 ? getRandomImageFromSet() : undefined,
       tags: generateRandomTags(),
       createdAt: new Date().toISOString(),
@@ -112,6 +114,7 @@ const generateRandomTasks = async (): Promise<Task[]> => {
       id: crypto.randomUUID(),
       title: generateTaskTitle(), // Nombres plausibles
       state: randomState,
+      position: positionCounter++, // Incrementamos la posición única
       image: Math.random() > 0.5 ? getRandomImageFromSet() : undefined,
       tags: generateRandomTags(),
       createdAt: new Date().toISOString(),

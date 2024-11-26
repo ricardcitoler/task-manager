@@ -38,7 +38,7 @@ export const createBoardSchema = z.object({
     .string()
     .min(1, "Logo is required")
     .url("Logo must be a valid URL")
-    .default("https://picsum.photos/200"), // Logo por defecto
+    .default("https://picsum.photos/100"), // Logo por defecto
   tasks: z.array(taskSchema).optional().default([]), // Array de tareas vacío por defecto
   createdAt: z.string().default(() => new Date().toISOString()), // Fecha actual
   updatedAt: z.string().default(() => new Date().toISOString()), // Fecha actual

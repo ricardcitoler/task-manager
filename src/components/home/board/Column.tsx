@@ -30,8 +30,8 @@ const Column: FC<ColumnProps> = ({ title, tasks, state }) => {
     return (
         <div className="space-y-3">
             <h1 className="font-bold text-lg flex justify-start items-center"><GoDotFill className={`${color}`} /><p>{title}</p></h1>
-            {tasks.map((task) => (
-                <TaskCard key={task.id} task={task} />
+            {tasks.map((task, index) => (
+                <TaskCard index={index} key={task.id} task={task} />
             ))}
         </div>
     );
