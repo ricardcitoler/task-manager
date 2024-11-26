@@ -1,7 +1,8 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { Task, TaskState } from "@/types/types";
 import TaskCard from "./TaskCard";
 import { GoDotFill } from "react-icons/go";
+import AddTaskButton from "@/components/ui/AddTaskButton";
 
 interface ColumnProps {
     title: string; // Título de la columna (por ejemplo, "Backlog")
@@ -33,6 +34,9 @@ const Column: FC<ColumnProps> = ({ title, tasks, state }) => {
             {tasks.map((task, index) => (
                 <TaskCard index={index} key={task.id} task={task} />
             ))}
+            {state === "BACKLOG" && (
+                <AddTaskButton />
+            )}
         </div>
     );
 };

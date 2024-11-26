@@ -2,7 +2,7 @@ import { z } from "zod";
 import { v4 as uuidv4 } from "uuid"; // Importa uuid
 
 // Esquema para una tarea (Task)
-export const taskSchema = z.object({
+export const createTaskSchema = z.object({
   id: z.string().default(() => uuidv4()), // Genera un UUID por defecto
   title: z.string().min(1, "Task title is required").default("New Task"), // Valor predeterminado
   state: z
@@ -19,6 +19,7 @@ export const taskSchema = z.object({
     )
     .optional()
     .default([]), // Array vacío por defecto
+  position: z.number().default(0),
   createdAt: z
     .string()
     .datetime("Invalid date format")
@@ -39,11 +40,11 @@ export const createBoardSchema = z.object({
     .min(1, "Logo is required")
     .url("Logo must be a valid URL")
     .default("https://picsum.photos/100"), // Logo por defecto
-  tasks: z.array(taskSchema).optional().default([]), // Array de tareas vacío por defecto
+  tasks: z.array(createTaskSchema).optional().default([]), // Array de tareas vacío por defecto
   createdAt: z.string().default(() => new Date().toISOString()), // Fecha actual
   updatedAt: z.string().default(() => new Date().toISOString()), // Fecha actual
 });
 
 // Tipos inferidos a partir de los esquemas
-export type TaskFormData = z.infer<typeof taskSchema>;
+export type TaskFormData = z.infer<typeof createTaskSchema>;
 export type CreateBoardFormData = z.infer<typeof createBoardSchema>;

@@ -1,0 +1,144 @@
+"use client"
+import React, { FC } from 'react'
+import { FaCheck } from "react-icons/fa6";
+import { IoMdClose } from "react-icons/io";
+import { imageURLs } from '../../../utils/generator';
+import { z } from "zod";
+import { useForm } from 'react-hook-form';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { addBoardAction } from '@/redux/actions/boards';
+import { createTaskSchema } from '@/validators/schemas';
+import { Dispatch } from 'redux';
+import { useDispatch } from 'react-redux';
+
+
+// Tipo inferido para los datos del formulario
+type CreateBoardFormData = z.infer<typeof createTaskSchema>;
+
+interface Props {
+    onClose: () => void;
+    isOpen: boolean;
+}
+
+const CreateTaskModal: FC<Props> = ({ onClose, isOpen }) => {
+    const dispatch: Dispatch<any> = useDispatch();
+
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        watch,
+        formState: { errors },
+    } = useForm<CreateBoardFormData>({
+        resolver: zodResolver(createTaskSchema),
+    });
+
+    const selectedImage = watch("image");
+
+    if (!isOpen) return null;
+    const onSubmit = (data: CreateBoardFormData) => {
+        dispatch(addBoardAction(data))
+        onClose()
+    };
+
+    const status = [
+        { option: "backlog", value: "BACKLOG" },
+        { option: "in progress", value: "IN_PROGRESS" },
+        { option: "in review", value: "IN_REVIEW" },
+        { option: "completed", value: "COMPLETED" }
+    ];
+
+    return (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="w-[400px] bg-border-gradient p-1 rounded-xl"
+            >
+                <div className="relative h-[500px] flex flex-col w-full bg-light-secondary dark:bg-dark-secondary space-y-3 p-3 rounded-lg">
+                    <h1 className="mb-3">Task details</h1>
+                    <img
+                        src={selectedImage}
+                        alt={`image`}
+                        width={50}
+                        height={50}
+                        className="w-full rounded-md object-cover h-[80px]"
+                    />
+                    {/* Campo de título */}
+
+                    <label className="block text-[12px] text-gray-400">Task name</label>
+                    <input
+                        {...register("title")}
+                        placeholder="e.g. Default Board"
+                        type="text"
+                        className="outline-none bg-transparent border rounded-lg px-2 py-1 border-gray-400"
+                    />
+                    <label className="block text-[12px] text-gray-400">Status</label>
+                    <select
+                        {...register("title")}
+
+                        className="outline-none bg-transparent border rounded-lg px-2 py-1 border-gray-400"
+                    >
+                        {status.map((state, index) => (
+                            <option className='bg-light-secondary dark:bg-dark-secondary outline-none border rounded-lg' key={index} value={state.value}>
+                                {state.option}
+                            </option>
+
+                        ))}
+                    </select>
+                    {errors.title && (
+                        <p className="text-red-500 text-xs">{errors.title.message}</p>
+                    )}
+
+                    {/* Campo para selección de logo */}
+                    <p className="text-[12px] text-gray-400">Logos</p>
+                    <div className="flex flex-wrap gap-2">
+                        {imageURLs.map((img, index) => (
+                            <div
+                                key={index}
+                                onClick={() => setValue("image", img)}
+                                className={`rounded-full cursor-pointer border-2 ${selectedImage === img ? "border-blue-500" : "border-gray-500"
+                                    }`}
+                            >
+                                <img
+                                    src={img}
+                                    alt={`image ${index}`}
+                                    width={50}
+                                    height={50}
+                                    className="rounded-full w-10 h-10"
+                                />
+                            </div>
+                        ))}
+                    </div>
+                    {errors.image && (
+                        <p className="text-red-500 text-xs">{errors.image.message}</p>
+                    )}
+                    <div className="w-full flex items-center justify-start gap-2">
+                        <button
+                            type="submit"
+                            className="flex flex-row bg-blue-600 py-1 px-4 items-center gap-2 rounded-full"
+                        >
+                            <p className="font-sem">Save</p>
+                            <FaCheck />
+                        </button>
+                        <button
+                            type="button"
+                            className="py-1 px-4 border-2 font-semibold border-gray-400 rounded-full text-gray-400"
+                            onClick={onClose}
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                    <button
+                        type="button"
+                        onClick={onClose}
+                        className="absolute top-0 right-3"
+                    >
+                        <IoMdClose />
+                    </button>
+                </div>
+            </form>
+        </div>
+    );
+};
+
+export default CreateTaskModal;
