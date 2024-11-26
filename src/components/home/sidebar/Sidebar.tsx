@@ -27,7 +27,7 @@ const Sidebar: FC<Props> = ({ className, setIsCreateBoardModalOpen, isCreateBoar
 
     return (
         <div className={`relative min-w-[78px] h-full flex flex-col ${className}`}>
-            <div className=" space-y-5 scroll-y-auto">
+            <div className="flex-1 overflow-y-auto space-y-5 scroll-y-auto"> {/* Ajusta overflow aquí */}
                 <h1 className="text-[20px] px-2">Boards</h1>
                 {boards.map((board) => (
                     <BoardLabel key={board.id} board={board} />
@@ -37,7 +37,7 @@ const Sidebar: FC<Props> = ({ className, setIsCreateBoardModalOpen, isCreateBoar
                     className="flex px-2 py-1 items-center justify-center gap-2"
                 >
                     <FaCirclePlus className="h-5 w-5 md:w-4 md:h-4" />
-                    <p className="hidden  md:block truncate">Add new board</p> {/* Oculto en pantallas pequeñas */}
+                    <p className="hidden md:block truncate">Add new board</p>
                 </button>
             </div>
             <div className="w-full absolute bottom-0">
