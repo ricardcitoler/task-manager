@@ -20,7 +20,7 @@ const Dashboard: FC<Props> = ({ className }) => {
     const { detailBoard } = useBoards();
     const initialTasks = detailBoard?.tasks || [];
     const dispatch: Dispatch<any> = useDispatch();
-
+    {/* <AddTaskButton /> */ }
     // Dividimos las tareas según su estado
     const [groupedTasks, setGroupedTasks] = useState<Record<TaskState, Task[]>>({
         BACKLOG: [],
@@ -38,7 +38,7 @@ const Dashboard: FC<Props> = ({ className }) => {
             COMPLETED: [],
         };
         initialTasks.forEach((task) => {
-            grouped[task.state].push(task);
+            grouped[task.status].push(task);
         });
         setGroupedTasks(grouped);
     }, [initialTasks]);
@@ -68,7 +68,7 @@ const Dashboard: FC<Props> = ({ className }) => {
             const [movedTask] = sourceTasks.splice(source.index, 1);
 
             // Actualizamos el estado de la tarea
-            const updatedTask = { ...movedTask, state: destination.droppableId as TaskState };
+            const updatedTask = { ...movedTask, status: destination.droppableId as TaskState };
 
             destinationTasks.splice(destination.index, 0, updatedTask);
 
@@ -90,10 +90,10 @@ const Dashboard: FC<Props> = ({ className }) => {
     return (
         <DragDropContext onDragEnd={onDragEnd}>
             <div
-                className={`grid grid-cols-1 md:grid-cols-4 gap-4 p-4 justify-center bg-light-secondary dark:bg-dark-secondary rounded-xl ${className}`}
+                className={`grid grid-cols-1 md:grid-cols-4 max-w-[1100px] overflow-y-auto gap-4 p-4 justify-center bg-light-secondary dark:bg-dark-secondary rounded-xl ${className}`}
             >
-                {taskStates.map((state) => (
-                    <Droppable key={state} droppableId={state}>
+                {taskStates.map((status) => (
+                    <Droppable key={status} droppableId={status}>
                         {(provided) => (
                             <div
                                 ref={provided.innerRef}
@@ -101,10 +101,10 @@ const Dashboard: FC<Props> = ({ className }) => {
                                 className="space-y-3"
                             >
                                 <Column
-                                    key={state}
-                                    state={state}
-                                    title={state.replace("_", " ")}
-                                    tasks={groupedTasks[state]}
+                                    key={status}
+                                    status={status}
+                                    title={status.replace("_", " ")}
+                                    tasks={groupedTasks[status]}
                                 />
                                 {provided.placeholder}
                             </div>

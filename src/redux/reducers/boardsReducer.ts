@@ -46,9 +46,18 @@ const boardsReducer: Reducer<BoardsState, BoardActionType> = (
 
       case "ADD_TASK_TO_BOARD": {
         const { boardId, task } = action.payload;
-        const board = draft.boards.find((b) => b.id === boardId);
-        if (board) {
+        const boardIndex = draft.boards.findIndex((b) => b.id === boardId);
+
+        if (boardIndex !== -1) {
+          const board = draft.boards[boardIndex];
+
+          // Añadir la tarea al array de tareas del tablero
           board.tasks = [...(board.tasks || []), task];
+
+          // Si el detailBoard coincide con este boardId, actualízalo también
+          if (draft.detailBoard?.id === boardId) {
+            draft.detailBoard.tasks = board.tasks;
+          }
         }
         break;
       }

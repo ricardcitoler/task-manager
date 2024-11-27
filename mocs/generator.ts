@@ -60,7 +60,9 @@ const generateTagName = (): string => {
 };
 
 // Generar tags aleatorios
-const generateRandomTags = (): Tags[] => {
+export const generateRandomTags = (
+  count: number = Math.floor(Math.random() * 4) + 1
+): Tags[] => {
   const colors = [
     "red-100",
     "blue-100",
@@ -73,7 +75,8 @@ const generateRandomTags = (): Tags[] => {
     "cyan-100",
     "lime-100",
   ];
-  return Array.from({ length: Math.floor(Math.random() * 4) + 1 }).map(() => ({
+
+  return Array.from({ length: count }).map(() => ({
     id: crypto.randomUUID(),
     name: generateTagName(), // Una sola palabra
     color: colors[Math.floor(Math.random() * colors.length)],
@@ -91,11 +94,11 @@ const generateRandomTasks = async (): Promise<Task[]> => {
 
   // Genera al menos 3 tareas por estado con una posición única
   let positionCounter = 0; // Contador global para asignar posiciones
-  const tasksByState = states.flatMap((state) =>
+  const tasksByState = states.flatMap((status) =>
     Array.from({ length: 3 }).map(() => ({
       id: crypto.randomUUID(),
       title: generateTaskTitle(), // Nombres plausibles
-      state, // Aseguramos el tipo TaskState
+      status, // Aseguramos el tipo TaskState
       position: positionCounter++, // Incrementamos la posición única
       image: Math.random() > 0.5 ? getRandomImageFromSet() : undefined,
       tags: generateRandomTags(),
@@ -113,7 +116,7 @@ const generateRandomTasks = async (): Promise<Task[]> => {
     return {
       id: crypto.randomUUID(),
       title: generateTaskTitle(), // Nombres plausibles
-      state: randomState,
+      status: randomState,
       position: positionCounter++, // Incrementamos la posición única
       image: Math.random() > 0.5 ? getRandomImageFromSet() : undefined,
       tags: generateRandomTags(),

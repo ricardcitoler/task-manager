@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid"; // Importa uuid
 export const createTaskSchema = z.object({
   id: z.string().default(() => uuidv4()), // Genera un UUID por defecto
   title: z.string().min(1, "Task title is required").default("New Task"), // Valor predeterminado
-  state: z
+  status: z
     .enum(["BACKLOG", "IN_PROGRESS", "IN_REVIEW", "COMPLETED"])
     .default("BACKLOG"), // Estado predeterminado
   image: z.string().url("Task image must be a valid URL").optional(), // URL opcional

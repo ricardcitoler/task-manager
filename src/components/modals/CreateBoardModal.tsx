@@ -2,7 +2,7 @@
 import React, { FC } from 'react'
 import { FaCheck } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
-import { imageURLs } from '../../../utils/generator';
+import { imageURLs } from '../../../mocs/generator';
 import { z } from "zod";
 import { useForm } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";

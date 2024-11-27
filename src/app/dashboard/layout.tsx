@@ -1,6 +1,6 @@
 
 import HomeLayout from "@/components/home/HomeLayout";
-import { boardsGenerator } from "../../../utils/generator";
+import { boardsGenerator } from "../../../mocs/generator";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
     try {

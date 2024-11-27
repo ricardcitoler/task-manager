@@ -10,7 +10,7 @@ export interface Board {
 export interface Task {
   id: string;
   title: string;
-  state: TaskState;
+  status: TaskState;
   position: number; // Agregado para el orden
   image?: string;
   tags?: Tags[];
@@ -22,11 +22,6 @@ export interface Tags {
   id: string;
   name: string;
   color: string;
-}
-
-export interface ColumnType {
-  name: string;
-  tasks: Task[];
 }
 
 export type TaskState = "BACKLOG" | "IN_PROGRESS" | "IN_REVIEW" | "COMPLETED";
