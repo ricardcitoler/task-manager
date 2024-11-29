@@ -6,17 +6,18 @@ import BoardLabel from "./BoardLabel";
 import { FaCirclePlus } from "react-icons/fa6";
 import { addBoardAction } from "@/redux/actions/boards";
 import CreateBoardModal from "@/components/modals/CreateBoardModal";
+import AddTaskButton from "@/components/ui/AddTaskButton";
+import AddBoardButton from "@/components/ui/AddBoardButton";
 interface Props {
     className?: string;
     setIsCreateBoardModalOpen: (value: boolean) => void;
     isCreateBoardModalOpen: boolean;
 }
-
-const Sidebar: FC<Props> = ({ className, setIsCreateBoardModalOpen, isCreateBoardModalOpen }) => {
+const Sidebar: FC<Props> = ({ className, setIsCreateBoardModalOpen }) => {
     const [isClient, setIsClient] = useState(false);
-    const { boards } = useBoards()
+    const { boards } = useBoards();
 
-    //para evitar errores de hidratación que da llamar al reducer de los boards
+    // Evita errores de hidratación
     useEffect(() => {
         setIsClient(true);
     }, []);
@@ -27,20 +28,29 @@ const Sidebar: FC<Props> = ({ className, setIsCreateBoardModalOpen, isCreateBoar
 
     return (
         <div className={`relative min-w-[78px] h-full flex flex-col ${className}`}>
-            <div className="flex-1 overflow-y-auto space-y-5 scroll-y-auto"> {/* Ajusta overflow aquí */}
-                <h1 className="text-[20px] px-2">Boards</h1>
+
+            <div
+                className="flex-1 overflow-y-auto space-y-5 overflow-x-hidden"
+                style={{
+                    paddingBottom: "1rem",
+                    maxHeight: "calc(100% - 9rem)",
+                }}
+            >
+                <h1
+                    className="text-[20px] px-2 pb-2 bg-light-primary dark:bg-dark-primary sticky top-0 z-10"
+                >
+                    Boards
+                </h1>
                 {boards.map((board) => (
                     <BoardLabel key={board.id} board={board} />
                 ))}
-                <button
-                    onClick={() => setIsCreateBoardModalOpen(true)}
-                    className="flex px-2 py-1 items-center justify-center gap-2"
-                >
-                    <FaCirclePlus className="h-5 w-5 md:w-4 md:h-4" />
-                    <p className="hidden md:block truncate">Add new board</p>
-                </button>
+
             </div>
-            <div className="w-full absolute bottom-0">
+
+            {/* Zona inferior fija */}
+            <div className="w-full absolute bottom-3 space-y-3">
+                <AddBoardButton onClick={() => setIsCreateBoardModalOpen(true)} />
+                <AddTaskButton />
                 <ThemeSwitcher />
             </div>
         </div>

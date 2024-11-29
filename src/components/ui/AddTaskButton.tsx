@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FaPlus } from "react-icons/fa6";
+import { FaCirclePlus, FaPlus } from "react-icons/fa6";
 import CreateTaskModal from '../modals/CreateTaskModal';
 
 
@@ -8,8 +8,8 @@ const AddTaskButton = () => {
 
     return (
         <>
-            <button onClick={() => setOpenModal(true)} className='py-2 px-3 w-full bg-blue-100 text-blue-500 flex flex-row items-center justify-between rounded-xl'>
-                <strong className='text-[14px]'>Add new task card</strong><FaPlus className='text-[18px]' />
+            <button onClick={() => setOpenModal(true)} className='py-1 gap-2 px-3 w-full bg-blue-100 text-blue-500 flex flex-row items-center justify-center rounded-xl'>
+                <FaCirclePlus className="h-5 w-5 md:w-4 md:h-4" /><strong className='text-[14px] hidden md:block truncate'>Add new task</strong>
             </button>
             {openModal && <CreateTaskModal isOpen={openModal} onClose={() => setOpenModal(false)} />}
         </>

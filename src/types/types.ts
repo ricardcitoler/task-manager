@@ -18,6 +18,18 @@ export interface Task {
   updatedAt?: string;
 }
 
+export interface SearchedTask {
+  id: string;
+  boardTitle: string;
+  title: string;
+  status: TaskState;
+  position: number; // Agregado para el orden
+  image?: string;
+  tags?: Tags[];
+  createdAt: string;
+  updatedAt?: string;
+}
+
 export interface Tags {
   id: string;
   name: string;

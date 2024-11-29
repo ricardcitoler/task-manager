@@ -17,3 +17,26 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Estilo del contenedor de la barra de scroll (track) */
+::-webkit-scrollbar {
+  width: 10px; /* Ancho de la scrollbar */
+}
+
+/* Fondo de la scrollbar */
+::-webkit-scrollbar-track {
+  background: #2a2d32; /* Gris claro para el fondo */
+  border-radius: 10px; /* Borde redondeado */
+}
+
+/* Estilo del thumb (indicador de posición) */
+::-webkit-scrollbar-thumb {
+  background: #1a1b1f; /* Color negro */
+  border-radius: 10px; /* Borde redondeado */
+}
+
+/* Opcional: Agregar un borde para el thumb */
+::-webkit-scrollbar-thumb {
+  background-clip: padding-box; /* Asegura que el borde esté bien definido */
+  border: 2px solid #2a2d32; /* Bordes del thumb (color del track) */
+}
