@@ -47,7 +47,6 @@ const Sidebar: FC<Props> = ({ className, setIsCreateBoardModalOpen }) => {
 
             </div>
 
-            {/* Zona inferior fija */}
             <div className="w-full absolute bottom-3 space-y-3">
                 <AddBoardButton onClick={() => setIsCreateBoardModalOpen(true)} />
                 <AddTaskButton />

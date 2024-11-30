@@ -90,7 +90,7 @@ const Dashboard: FC<Props> = ({ className }) => {
     return (
         <DragDropContext onDragEnd={onDragEnd}>
             <div
-                className={`grid grid-cols-1 md:grid-cols-4 max-w-[1100px] overflow-y-auto gap-4 p-4 justify-center bg-light-secondary dark:bg-dark-secondary rounded-xl ${className}`}
+                className={`grid grid-cols-1 md:grid-cols-4 max-w-[1100px] overflow-y-auto gap-4 px-4 pb-4 justify-center bg-light-secondary dark:bg-dark-secondary rounded-xl ${className}`}
             >
                 {taskStates.map((status) => (
                     <Droppable key={status} droppableId={status}>
@@ -98,7 +98,7 @@ const Dashboard: FC<Props> = ({ className }) => {
                             <div
                                 ref={provided.innerRef}
                                 {...provided.droppableProps}
-                                className="space-y-3"
+                                className="space-y-3 "
                             >
                                 <Column
                                     key={status}

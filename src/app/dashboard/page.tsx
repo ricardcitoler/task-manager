@@ -2,7 +2,7 @@ import HomePage from "@/components/home/HomePage";
 
 const Page = ({ }) => {
     try {
-        return <div className="">
+        return <div className="w-full h-full">
             <HomePage />
         </div>;
     } catch (e) {

@@ -29,8 +29,8 @@ const Column: FC<ColumnProps> = ({ title, tasks, status }) => {
 
     const color = colorSelector(status);
     return (
-        <div className="space-y-3">
-            <h1 className="font-bold text-lg flex justify-start items-center">
+        <div className="space-y-3 ">
+            <h1 className="font-bold text-lg flex justify-start items-center sticky top-0 z-10 bg-light-secondary dark:bg-dark-secondary py-3">
                 <GoDotFill className={`${color}`} />
                 <p>{title}({tasks.length})</p>
             </h1>

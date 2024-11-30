@@ -2,12 +2,14 @@ import React, { FC, useState } from "react";
 import { useBoards } from "@/redux/selector/board";
 import SearchedTaskCard from "./SearchedTaskCard";
 import { SearchedTask } from "@/types/types";
+import ActionButton from "../actions/ActionButtons";
 
 interface Props {
     className?: string;
+    isDrawer?: boolean
 }
 
-const Search: FC<Props> = ({ className }) => {
+const Search: FC<Props> = ({ className, isDrawer }) => {
     const { boards } = useBoards();
     const [query, setQuery] = useState("");
     const [filteredTasks, setFilteredTasks] = useState<any[]>([]);
@@ -34,18 +36,23 @@ const Search: FC<Props> = ({ className }) => {
     };
 
     return (
-        <div className={`px-4 overflow-y-auto ${className}`}>
-            <input
-                type="text"
-                value={query}
-                onChange={handleSearch}
-                placeholder="Buscar boards o tareas..."
-                className="w-full p-2 border rounded mb-4 dark:text-black "
-            />
-            <div className="w-full space-y-3 flex flex-wrap gap-3">
-                {filteredTasks.map((task) => (
-                    <SearchedTaskCard key={task.id} task={task} />
-                ))}
+        <div className="flex flex-row ">
+            <div className={`px-4 overflow-y-auto  ${className}`}>
+                <input
+                    type="text"
+                    value={query}
+                    onChange={handleSearch}
+                    placeholder="Buscar tareas..."
+                    className={` py-1 border-2 rounded-full bg-transparent px-2 outline-none mb-4 text-black dark:text-white placeholder:text-gray-500 ${isDrawer ? "border-dark-primary" : "border-light-secondary dark:border-dark-secondary"} `}
+                />
+                <div className="w-full space-y-3 flex flex-wrap gap-3">
+                    {filteredTasks.map((task) => (
+                        <SearchedTaskCard key={task.id} task={task} isDrawer={isDrawer} />
+                    ))}
+                </div>
+            </div>
+            <div className="h-full w-[70px] 2xl:hidden">
+                <ActionButton hideDrawer={true} className="2xl:hidden" />
             </div>
         </div>
     );

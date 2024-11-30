@@ -4,6 +4,7 @@ import clsx from "clsx";
 
 interface Props {
     task: SearchedTask;
+    isDrawer?: boolean
 }
 
 // Mapeo de colores para Tailwind
@@ -20,12 +21,12 @@ const colorMap: Record<string, string> = {
     "lime-100": "bg-lime-100 text-lime-600",
 };
 
-const SearchedTaskCard: FC<Props> = ({ task }) => {
+const SearchedTaskCard: FC<Props> = ({ task, isDrawer }) => {
     return (
         <div
-            className="space-y-2 bg-light-secondary dark:bg-dark-secondary rounded-xl p-2 max-w-[250px]"
+            className={`space-y-2 bg-light-secondary dark:bg-dark-secondary rounded-xl p-2 max-w-[250px] ${isDrawer ? "border-2 border-gray-500" : " "}`}
         >
-            <h3>{task.boardTitle}</h3>
+            <h3>Board: {task.boardTitle}</h3>
             {task.image && (
                 <img
                     className="rounded-lg w-full h-[70px] object-cover"

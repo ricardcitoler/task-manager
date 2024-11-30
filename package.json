@@ -16,6 +16,8 @@
     "@hookform/resolvers": "^3.9.1",
     "@reduxjs/toolkit": "^2.3.0",
     "clsx": "^2.1.1",
+    "flowbite": "^2.5.2",
+    "flowbite-react": "^0.10.2",
     "fuse.js": "^7.0.0",
     "immer": "^10.1.1",
     "next": "15.0.3",

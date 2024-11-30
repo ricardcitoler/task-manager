@@ -30,7 +30,7 @@ const TaskCard: FC<Props> = ({ task, index }) => {
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
-                    className="space-y-2 bg-light-primary dark:bg-dark-primary rounded-xl p-2 max-w-[250px]"
+                    className="space-y-2 border border-gray-700y dark:border-none bg-light-primary dark:bg-dark-primary rounded-xl p-2 max-w-[250px]"
                 >
                     {task.image && (
                         <img
@@ -47,7 +47,7 @@ const TaskCard: FC<Props> = ({ task, index }) => {
                                     key={index}
                                     className={clsx(
                                         "px-1 text-[10px] border rounded",
-                                        colorMap[tag.color] || "bg-gray-100 text-gray-600" // Clase por defecto si el color no está en el mapa
+                                        colorMap[tag.color] || "bg-gray-100 text-gray-600"
                                     )}
                                 >
                                     <p>{tag.name}</p>
