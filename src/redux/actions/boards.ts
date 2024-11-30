@@ -9,7 +9,19 @@ export type BoardActionType =
   | ReturnType<typeof removeTaskFromBoardAction>
   | ReturnType<typeof setTasksForBoardAction>
   | ReturnType<typeof updateTaskInBoardAction>
-  | ReturnType<typeof setDetailBoardAction>;
+  | ReturnType<typeof setDetailBoardAction>
+  | ReturnType<typeof toggleSearchDrawer>
+  | ReturnType<typeof setSearchDrawerAction>;
+
+export const toggleSearchDrawer = (isOpen: boolean) => ({
+  type: "TOGGLE_SEARCHDRAWER" as const,
+  payload: isOpen,
+});
+
+export const setSearchDrawerAction = (isOpen: boolean) => ({
+  type: "SET_SEARCH_DRAWER" as const,
+  payload: isOpen,
+});
 
 // Acciones relacionadas con boards
 export const addBoardAction = (board: Board) => ({

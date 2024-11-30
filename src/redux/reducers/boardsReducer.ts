@@ -6,11 +6,13 @@ import { Board } from "@/types/types";
 interface BoardsState {
   boards: Board[];
   detailBoard?: Board | null;
+  isSearchDrawerOpen: boolean;
 }
 
 const initialState: BoardsState = {
   boards: [],
   detailBoard: null,
+  isSearchDrawerOpen: false,
 };
 
 const boardsReducer: Reducer<BoardsState, BoardActionType> = (
@@ -21,6 +23,9 @@ const boardsReducer: Reducer<BoardsState, BoardActionType> = (
     switch (action.type) {
       case "SET_BOARDS":
         draft.boards = action.payload;
+        break;
+      case "SET_SEARCH_DRAWER":
+        draft.isSearchDrawerOpen = action.payload;
         break;
 
       case "SET_DETAIL_BOARD":
@@ -91,7 +96,9 @@ const boardsReducer: Reducer<BoardsState, BoardActionType> = (
         }
         break;
       }
-
+      case "TOGGLE_SEARCHDRAWER":
+        draft.isSearchDrawerOpen = action.payload;
+        break;
       default:
         break;
     }

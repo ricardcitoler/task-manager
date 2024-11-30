@@ -130,7 +130,7 @@ const generateRandomTasks = async (): Promise<Task[]> => {
 
 // Generar boards aleatorios
 export const boardsGenerator = async (): Promise<Board[]> => {
-  const boards = Array.from({ length: 13 }).map(async () => ({
+  const boards = Array.from({ length: 3 }).map(async () => ({
     id: crypto.randomUUID(),
     title: generateBoardTitle(), // Títulos significativos
     tasks: await generateRandomTasks(),

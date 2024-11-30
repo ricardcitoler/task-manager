@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 import { useBoards } from "@/redux/selector/board";
 import SearchedTaskCard from "./SearchedTaskCard";
 import { SearchedTask } from "@/types/types";
-import ActionButton from "../actions/ActionButtons";
+import ActionButtons from "../actions/ActionButtons";
 
 interface Props {
     className?: string;
@@ -52,7 +52,7 @@ const Search: FC<Props> = ({ className, isDrawer }) => {
                 </div>
             </div>
             <div className="h-full w-[70px] 2xl:hidden">
-                <ActionButton hideDrawer={true} className="2xl:hidden" />
+                {/*  <ActionButtons hideDrawer={true} className="2xl:hidden" /> */}
             </div>
         </div>
     );
