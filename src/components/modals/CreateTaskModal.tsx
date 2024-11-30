@@ -46,6 +46,12 @@ const CreateTaskModal: FC<Props> = ({ onClose, isOpen }) => {
     const { detailBoard } = useBoards()
     const [tags, setTags] = useState<Tags[]>([]);
 
+    const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (e.target === e.currentTarget) {
+            onClose();
+        }
+    };
+
     const {
         register,
         handleSubmit,
@@ -94,7 +100,7 @@ const CreateTaskModal: FC<Props> = ({ onClose, isOpen }) => {
     }, [isOpen]);
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div onClick={handleOverlayClick} className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="w-[400px] bg-border-gradient p-1 rounded-xl"
