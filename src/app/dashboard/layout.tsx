@@ -1,4 +1,3 @@
-
 import HomeLayout from "@/components/home/HomeLayout";
 import { boardsGenerator } from "../../../mocs/generator";
 
@@ -11,12 +10,20 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
                 {children}
             </HomeLayout>
         );
-    } catch (e: any) {
-        console.log(e);
-        if (e.response && e.response.data) {
-            console.error("API Error:", e.response); // Log detailed error message
+    } catch (e: unknown) {
+        // Validación de tipo para errores
+        if (e instanceof Error) {
+            console.error("Error:", e.message); // Log genérico para errores conocidos
+
+            // Validar si el error tiene una propiedad 'response'
+            if (
+                typeof (e as any).response === "object" &&
+                (e as any).response?.data
+            ) {
+                console.error("API Error:", (e as any).response);
+            }
         } else {
-            console.error("Error:", e.message); // Log generic error message
+            console.error("Unexpected error:", e);
         }
     }
 };

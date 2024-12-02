@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FaCirclePlus, FaPlus } from "react-icons/fa6";
+import { FaCirclePlus } from "react-icons/fa6";
 import CreateTaskModal from '../modals/CreateTaskModal';
 
 

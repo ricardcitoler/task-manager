@@ -2,6 +2,7 @@ import { Task } from "@/types/types";
 import React, { FC } from "react";
 import { Draggable } from "@hello-pangea/dnd";
 import clsx from "clsx";
+import Image from "next/image";
 
 interface Props {
     task: Task;
@@ -33,7 +34,7 @@ const TaskCard: FC<Props> = ({ task, index }) => {
                     className="space-y-2 border border-gray-700y dark:border-none bg-light-primary dark:bg-dark-primary rounded-xl p-2 max-w-[250px]"
                 >
                     {task.image && (
-                        <img
+                        <Image
                             className="rounded-lg w-full h-[70px] object-cover"
                             src={task.image}
                             alt={task.title}

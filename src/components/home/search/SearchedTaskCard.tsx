@@ -1,6 +1,7 @@
 import { SearchedTask } from "@/types/types";
 import React, { FC } from "react";
 import clsx from "clsx";
+import Image from "next/image";
 
 interface Props {
     task: SearchedTask;
@@ -28,7 +29,7 @@ const SearchedTaskCard: FC<Props> = ({ task, isDrawer }) => {
         >
             <h3>Board: {task.boardTitle}</h3>
             {task.image && (
-                <img
+                <Image
                     className="rounded-lg w-full h-[70px] object-cover"
                     src={task.image}
                     alt={task.title}

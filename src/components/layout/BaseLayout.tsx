@@ -1,7 +1,6 @@
 "use client"
 import React, { FC, ReactNode, Suspense } from "react";
 import { ReduxProvider } from "@/redux/redux-provider";
-import store from "@/redux/store";
 
 interface Props {
     children: ReactNode;

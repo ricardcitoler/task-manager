@@ -2,7 +2,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import { FaCheck } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
-import { generateRandomTags, imageURLs } from '../../../mocs/generator';
+import { generateRandomTags } from '../../../mocs/generator';
 import { z } from "zod";
 import { useForm } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,6 +14,7 @@ import { GoDotFill } from "react-icons/go";
 import { useBoards } from '@/redux/selector/board';
 import clsx from 'clsx';
 import { Tags } from '@/types/types';
+import Image from 'next/image';
 
 
 
@@ -111,7 +112,7 @@ const CreateTaskModal: FC<Props> = ({ onClose, isOpen }) => {
                         <label className="block text-[12px] text-gray-400">Select Image</label>
                         {selectedImage && (
                             <div className="mt-3">
-                                <img
+                                <Image
                                     src={selectedImage}
                                     alt="Selected preview"
                                     className="w-full rounded-md object-cover h-[150px]"

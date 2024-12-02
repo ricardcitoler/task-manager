@@ -18,9 +18,7 @@ interface Props {
 
 const Dashboard: FC<Props> = ({ className }) => {
     const { detailBoard } = useBoards();
-    const initialTasks = detailBoard?.tasks || [];
     const dispatch: Dispatch<any> = useDispatch();
-    {/* <AddTaskButton /> */ }
     // Dividimos las tareas según su estado
     const [groupedTasks, setGroupedTasks] = useState<Record<TaskState, Task[]>>({
         BACKLOG: [],
@@ -31,17 +29,18 @@ const Dashboard: FC<Props> = ({ className }) => {
 
     // Inicializamos las tareas en groupedTasks al cargar
     React.useEffect(() => {
+        const tasks = detailBoard?.tasks || [];
         const grouped: Record<TaskState, Task[]> = {
             BACKLOG: [],
             IN_PROGRESS: [],
             IN_REVIEW: [],
             COMPLETED: [],
         };
-        initialTasks.forEach((task) => {
+        tasks.forEach((task) => {
             grouped[task.status].push(task);
         });
         setGroupedTasks(grouped);
-    }, [initialTasks]);
+    }, [detailBoard]);
 
     // Maneja el evento de soltar tareas
     const onDragEnd = (result: DropResult) => {

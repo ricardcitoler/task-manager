@@ -3,9 +3,6 @@ import ThemeSwitcher from "@/components/ui/ThemeSwitcher";
 import { useBoards } from "@/redux/selector/board";
 import React, { FC, useEffect, useState } from "react";
 import BoardLabel from "./BoardLabel";
-import { FaCirclePlus } from "react-icons/fa6";
-import { addBoardAction } from "@/redux/actions/boards";
-import CreateBoardModal from "@/components/modals/CreateBoardModal";
 import AddTaskButton from "@/components/ui/AddTaskButton";
 import AddBoardButton from "@/components/ui/AddBoardButton";
 interface Props {

@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { Modal } from "flowbite-react";
 
 interface Props {
     isOpen: boolean;

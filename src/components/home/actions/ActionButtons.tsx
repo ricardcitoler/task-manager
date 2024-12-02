@@ -32,7 +32,8 @@ const ActionButton: FC<Props> = ({ hideDrawer, className }) => {
     const text =
         <div>
             <p>Do you want to delete the Board: </p>
-            <strong>`'${detailBoard?.title}'`</strong>
+            <strong>{`'${detailBoard?.title}'`}</strong>
+
         </div>
 
     return (

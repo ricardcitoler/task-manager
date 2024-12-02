@@ -10,6 +10,7 @@ import { addBoardAction } from '@/redux/actions/boards';
 import { createBoardSchema } from '@/validators/schemas';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
+import Image from 'next/image';
 
 
 // Tipo inferido para los datos del formulario
@@ -78,7 +79,7 @@ const CreateBoardModal: FC<Props> = ({ onClose, isOpen }) => {
                                 className={`rounded-full cursor-pointer border-2 ${selectedLogo === img ? "border-blue-500" : "border-gray-500"
                                     }`}
                             >
-                                <img
+                                <Image
                                     src={img}
                                     alt={`Logo ${index}`}
                                     width={50}

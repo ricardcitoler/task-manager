@@ -2,6 +2,7 @@
 import { setDetailBoardAction } from "@/redux/actions/boards";
 import { useBoards } from "@/redux/selector/board";
 import { Board } from "@/types/types";
+import Image from "next/image";
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
@@ -35,7 +36,7 @@ const BoardLabel: FC<Props> = ({ board }) => {
                     }`}
             >
                 {board.logo && (
-                    <img
+                    <Image
                         src={board.logo}
                         alt={`${board.title} logo`}
                         className="w-6 h-6 rounded-full object-cover"
