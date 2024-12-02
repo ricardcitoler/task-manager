@@ -1,8 +1,11 @@
 import React, { FC, useState } from "react";
 import { useBoards } from "@/redux/selector/board";
 import SearchedTaskCard from "./SearchedTaskCard";
-import { SearchedTask } from "@/types/types";
-import ActionButtons from "../actions/ActionButtons";
+import { Tooltip } from "flowbite-react";
+import { FcSearch } from "react-icons/fc";
+import { setSearchDrawerAction } from "@/redux/actions/boards";
+import { Dispatch } from "redux";
+import { useDispatch } from "react-redux";
 
 interface Props {
     className?: string;
@@ -10,9 +13,11 @@ interface Props {
 }
 
 const Search: FC<Props> = ({ className, isDrawer }) => {
-    const { boards } = useBoards();
+    const { boards, isSearchDrawerOpen } = useBoards();
     const [query, setQuery] = useState("");
     const [filteredTasks, setFilteredTasks] = useState<any[]>([]);
+    const dispatch: Dispatch<any> = useDispatch();
+
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         const searchText = e.target.value;
@@ -35,8 +40,13 @@ const Search: FC<Props> = ({ className, isDrawer }) => {
         setFilteredTasks(tasks);
     };
 
+    const handleCloseDrawer = () => {
+        dispatch(setSearchDrawerAction(false))
+        console.log("isSearchDrawerOpen", isSearchDrawerOpen)
+    }
+
     return (
-        <div className="flex flex-row ">
+        <div className="flex flex-row relative">
             <div className={`px-4 overflow-y-auto  ${className}`}>
                 <input
                     type="text"
@@ -51,9 +61,17 @@ const Search: FC<Props> = ({ className, isDrawer }) => {
                     ))}
                 </div>
             </div>
-            <div className="h-full w-[70px] 2xl:hidden">
-                {/*  <ActionButtons hideDrawer={true} className="2xl:hidden" /> */}
-            </div>
+            {isSearchDrawerOpen &&
+                (<span className="absolute top-0 right-8">
+                    <Tooltip content={isSearchDrawerOpen ? "Close Searchbar" : "Open Searchbar"}>
+                        <button
+                            className="rounded-full flex items-center justify-center"
+                            onClick={handleCloseDrawer}
+                        >
+                            <FcSearch className="w-10 h-10" />
+                        </button>
+                    </Tooltip>
+                </span>)}
         </div>
     );
 };

@@ -14,7 +14,7 @@ const HomePage = () => {
             <Sidebar isCreateBoardModalOpen={isCreateBoardModalOpen} setIsCreateBoardModalOpen={setIsCreateBoardModalOpen} className="w-[20%] lg:w-[17%] xl:min-w-[250px] h-full" />
             <Dashboard className="h-full w-full 2xl:min-w-[1200px] " />
             <Search className="2xl:max-w-[300px] hidden 2xl:block" />
-            {/* <ActionButtons className="hidden 2xl:block" /> */}
+            <ActionButtons />
             {<CreateBoardModal isOpen={isCreateBoardModalOpen} onClose={() => setIsCreateBoardModalOpen(false)} />}
         </div>
     )

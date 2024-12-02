@@ -1,35 +1,34 @@
+"use client";
+
 import React, { FC, useEffect, useState } from "react";
 import { FcSearch } from "react-icons/fc";
 import SearchDrawer from "../search/SearchDrawer";
 import { MdDeleteForever } from "react-icons/md";
 import { Dispatch } from "redux";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteBoardAction, setDetailBoardAction, setSearchDrawerAction, toggleSearchDrawer } from "@/redux/actions/boards";
+import { useDispatch } from "react-redux";
+import { deleteBoardAction, setDetailBoardAction, setSearchDrawerAction } from "@/redux/actions/boards";
 import { useBoards } from "@/redux/selector/board";
 import ConfirmModal from "@/components/modals/ConfirmModal";
 import { Tooltip } from "flowbite-react";
+import useDebouncedValue from "@/hooks/use-debounce-value";
 
 interface Props {
-    hideDrawer?: boolean;
     className?: string;
 }
 
-const ActionButtons: FC<Props> = ({ hideDrawer, className }) => {
+const ActionButtons: FC<Props> = ({ className }) => {
     const dispatch: Dispatch<any> = useDispatch();
     const [deleteModal, setDeleteModal] = useState(false);
-    const { detailBoard, boards } = useBoards();
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const { detailBoard, boards, isSearchDrawerOpen } = useBoards();
 
-
-    const { isSearchDrawerOpen } = useBoards()
+    // Estado para manejar debounce
+    const debouncedSearchDrawerOpen = useDebouncedValue(isSearchDrawerOpen, 300);
 
     const toggleDrawer = () => {
-        dispatch(setSearchDrawerAction(!isSearchDrawerOpen))
+        const nextState = !isSearchDrawerOpen;
+        dispatch(setSearchDrawerAction(nextState));
+        console.log("Drawer toggled:", nextState);
     };
-
-    useEffect(() => {
-        setIsDrawerOpen(isSearchDrawerOpen)
-    }, [isSearchDrawerOpen])
 
     const handleDeleteBoard = () => {
         if (detailBoard) {
@@ -49,8 +48,8 @@ const ActionButtons: FC<Props> = ({ hideDrawer, className }) => {
     return (
         <div className={`max-w-[70px] w-full flex h-full ${className}`}>
             <div className="space-y-5 flex w-full flex-col items-center justify-start">
-                {hideDrawer && (
-                    <Tooltip content={isDrawerOpen ? "Close Searchbar" : "Open Searchbar"}>
+                <span className="2xl:hidden">
+                    <Tooltip content={debouncedSearchDrawerOpen ? "Close Searchbar" : "Open Searchbar"}>
                         <button
                             className="rounded-full flex items-center justify-center"
                             onClick={toggleDrawer}
@@ -58,7 +57,8 @@ const ActionButtons: FC<Props> = ({ hideDrawer, className }) => {
                             <FcSearch className="w-10 h-10" />
                         </button>
                     </Tooltip>
-                )}
+                </span>
+
                 <Tooltip content="Delete Actual Board">
                     <button onClick={() => setDeleteModal(true)}>
                         <MdDeleteForever className="w-10 h-10 text-red-600" />
@@ -66,8 +66,8 @@ const ActionButtons: FC<Props> = ({ hideDrawer, className }) => {
                 </Tooltip>
             </div>
             <ConfirmModal isOpen={deleteModal} action={handleDeleteBoard} text={text} onCancel={() => setDeleteModal(false)} />
-            {isDrawerOpen && (
-                <SearchDrawer onClose={toggleDrawer} isOpen={isDrawerOpen} />
+            {debouncedSearchDrawerOpen && (
+                <SearchDrawer onClose={toggleDrawer} isOpen={debouncedSearchDrawerOpen} />
             )}
         </div>
     );
