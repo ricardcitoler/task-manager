@@ -65,7 +65,6 @@ const CreateTaskModal: FC<Props> = ({ onClose, isOpen }) => {
     });
 
     const selectedImage = watch("image");
-
     const onSubmit = (data: CreateBoardFormData) => {
         if (detailBoard) {
             console.log(data)
@@ -77,18 +76,20 @@ const CreateTaskModal: FC<Props> = ({ onClose, isOpen }) => {
 
     const toggleTagSelection = (tag: Tags) => {
         setSelectedTags((prevTags) => {
+            let updatedTags;
+
             if (prevTags.some((t) => t.id === tag.id)) {
-                // Si el tag ya está seleccionado, lo quitamos
-                return prevTags.filter((t) => t.id !== tag.id);
+                updatedTags = prevTags.filter((t) => t.id !== tag.id);
             } else if (prevTags.length >= 4) {
-                // Si hay 4 seleccionados, eliminamos el primero y añadimos el nuevo
-                return [...prevTags.slice(1), tag];
+                updatedTags = [...prevTags.slice(1), tag];
+            } else {
+                updatedTags = [...prevTags, tag];
             }
-            // Si hay menos de 4 seleccionados, simplemente añadimos el nuevo
-            return [...prevTags, tag];
+            setValue("tags", updatedTags);
+            return updatedTags;
         });
-        setValue("tags", selectedTags);
     };
+
 
     useEffect(() => {
         setTags(generateRandomTags(20));
