@@ -33,6 +33,8 @@ const SearchedTaskCard: FC<Props> = ({ task, isDrawer }) => {
                     className="rounded-lg w-full h-[70px] object-cover"
                     src={task.image}
                     alt={task.title}
+                    width={10}
+                    height={10}
                 />
             )}
             <p>{task.title}</p>

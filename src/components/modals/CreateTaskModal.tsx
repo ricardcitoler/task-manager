@@ -116,6 +116,8 @@ const CreateTaskModal: FC<Props> = ({ onClose, isOpen }) => {
                                     src={selectedImage}
                                     alt="Selected preview"
                                     className="w-full rounded-md object-cover h-[150px]"
+                                    width={10}
+                                    height={10}
                                 />
                             </div>
                         )}

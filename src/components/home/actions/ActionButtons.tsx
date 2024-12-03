@@ -9,11 +9,10 @@ import { useBoards } from "@/redux/selector/board";
 import ConfirmModal from "@/components/modals/ConfirmModal";
 import { Tooltip } from "flowbite-react";
 interface Props {
-    hideDrawer?: boolean
     className?: string
 }
 
-const ActionButton: FC<Props> = ({ hideDrawer, className }) => {
+const ActionButton: FC<Props> = ({ className }) => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const dispatch: Dispatch<any> = useDispatch();
     const [deleteModal, setDeleteModal] = useState(false);
@@ -39,16 +38,14 @@ const ActionButton: FC<Props> = ({ hideDrawer, className }) => {
     return (
         <div className={`max-w-[70px] w-full flex h-full  ${className}`}>
             <div className="space-y-5 flex w-full flex-col items-center justify-start ">
-                {hideDrawer &&
-                    <Tooltip content="Open Searchbar">
-                        <button
-                            className="rounded-full flex items-center justify-center"
-                            onClick={() => setIsDrawerOpen(true)}
-                        >
-                            <FcSearch className="w-10 h-10" />
-                        </button>
-                    </Tooltip>
-                }
+                <Tooltip content="Open Searchbar">
+                    <button
+                        className="rounded-full flex items-center justify-center"
+                        onClick={() => setIsDrawerOpen(true)}
+                    >
+                        <FcSearch className="w-10 h-10" />
+                    </button>
+                </Tooltip>
                 <Tooltip content="Delete Actual Board">
                     <button onClick={() => setDeleteModal(true)}>
                         <MdDeleteForever className="w-10 h-10 text-red-600" />

@@ -38,7 +38,11 @@ const TaskCard: FC<Props> = ({ task, index }) => {
                             className="rounded-lg w-full h-[70px] object-cover"
                             src={task.image}
                             alt={task.title}
+                            width={250}
+                            height={70}
+                            quality={100}
                         />
+
                     )}
                     <p>{task.title}</p>
                     {task.tags && (

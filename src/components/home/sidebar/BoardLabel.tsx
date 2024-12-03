@@ -40,9 +40,10 @@ const BoardLabel: FC<Props> = ({ board }) => {
                         src={board.logo}
                         alt={`${board.title} logo`}
                         className="w-6 h-6 rounded-full object-cover"
+                        width={10}
+                        height={10}
                     />
                 )}
-                {/* Título visible solo en pantallas md o más grandes */}
                 <p className="truncate text-sm font-medium text-black dark:text-white hidden md:block">
                     {board.title}
                 </p>
